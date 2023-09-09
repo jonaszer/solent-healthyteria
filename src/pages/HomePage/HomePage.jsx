@@ -1,7 +1,12 @@
 import React from "react";
+import NavBar from "../../components/Navigation/NavBar";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <NavBar />
+    </>
+  );
 };
 
 export default HomePage;

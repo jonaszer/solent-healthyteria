@@ -14,19 +14,13 @@ const MobileNavOverlay = ({ onClose }) => {
       </svg>
       <ul>
         <li>
-          <Link className="link" to={"/"}>
-            HOME
-          </Link>
+          <Link to={"/"}>HOME</Link>
         </li>
         <li>
-          <Link className="link" to={"/menu"}>
-            MENU
-          </Link>
+          <Link to={"/menu"}>MENU</Link>
         </li>
         <li>
-          <Link className="link" to={"/register"}>
-            LOGIN
-          </Link>
+          <Link to={"/register"}>LOGIN</Link>
         </li>
       </ul>
     </div>

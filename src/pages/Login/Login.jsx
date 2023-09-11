@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FacebookRounded,
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
 import Google from "../../assets/google.png";
+import { auth } from "../../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -16,6 +18,7 @@ const Login = () => {
 
   const [toggleEye, setToggleEye] = useState(false);
   const [inputType, setInputType] = useState("password");
+  const navigate = useNavigate();
 
   const handleToggle = (e) => {
     setToggleEye(!toggleEye);
@@ -24,6 +27,21 @@ const Login = () => {
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    try {
+      signInWithEmailAndPassword(auth, inputs.email, inputs.password).then(
+        (userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+          navigate("/");
+        }
+      );
+    } catch (error) {}
   };
 
   console.log(inputs);
@@ -56,7 +74,9 @@ const Login = () => {
           </div>
         </div>
 
-        <button type="submit">Sign In</button>
+        <button type="submit" onClick={handleLogin}>
+          Sign In
+        </button>
 
         <div className="form-link">
           <span>Not a member yet?</span>

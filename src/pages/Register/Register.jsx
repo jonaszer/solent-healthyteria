@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./register.css";
 import FormInput from "../../components/FormInput/FormInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FacebookRounded } from "@mui/icons-material";
 import Google from "../../assets/google.png";
+import { auth } from "../../firebase";
+import { updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
   const [inputValues, setInputValues] = useState({
@@ -12,6 +14,8 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const navigate = useNavigate();
 
   const inputs = [
     {
@@ -56,7 +60,26 @@ const Register = () => {
   const handleChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
-  console.log(inputValues);
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    try {
+      await createUserWithEmailAndPassword(
+        auth,
+        inputValues.email,
+        inputValues.password
+      ).then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        updateProfile(user, {
+          displayName: inputValues.name,
+        });
+        navigate("/login");
+      });
+    } catch (error) {}
+  };
+  //console.log(inputValues);
 
   return (
     <div className="register">
@@ -70,7 +93,9 @@ const Register = () => {
             onChange={handleChange}
           />
         ))}
-        <button type="submit">Register</button>
+        <button type="submit" onClick={handleRegister}>
+          Register
+        </button>
 
         <div className="form-link">
           <span>Already have an account?</span>

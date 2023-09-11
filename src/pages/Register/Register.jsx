@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./register.css";
 import FormInput from "../../components/FormInput/FormInput";
 import { Link, useNavigate } from "react-router-dom";
 import { FacebookRounded } from "@mui/icons-material";
 import Google from "../../assets/google.png";
-import { auth } from "../../firebase";
-import { updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, provider } from "../../firebase";
+import { updateProfile, createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { AuthContext } from "../../context/AuthContext";
 
 const Register = () => {
+  const { dispatch } = useContext(AuthContext);
   const [inputValues, setInputValues] = useState({
     name: "",
     email: "",
@@ -79,7 +81,21 @@ const Register = () => {
       });
     } catch (error) {}
   };
-  //console.log(inputValues);
+
+  const signInWithGoogle = (e) => {
+    dispatch({ type: "LOGIN_START" });
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        //console.log(result);
+        const user = result.user;
+        dispatch({ type: "LOGIN_SUCCESS", payload: user });
+        navigate("/");
+        window.location.reload();
+      })
+      .catch((error) => {
+        dispatch({ type: "LOGIN_FAILURE" });
+      });
+  };
 
   return (
     <div className="register">
@@ -121,7 +137,8 @@ const Register = () => {
           <Link
             to="#"
             className="facebook google"
-            style={{ textDecoration: "none" }}>
+            style={{ textDecoration: "none" }}
+            onClick={signInWithGoogle}>
             <img src={Google} alt="Google Icon" className="google-img" />
             <span>Login with Google</span>
           </Link>

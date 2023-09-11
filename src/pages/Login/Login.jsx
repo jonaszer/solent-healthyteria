@@ -7,8 +7,8 @@ import {
   VisibilityOff,
 } from "@mui/icons-material";
 import Google from "../../assets/google.png";
-import { auth } from "../../firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, provider } from "../../firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
@@ -52,7 +52,22 @@ const Login = () => {
     }
   };
 
-  console.log(inputs);
+  const signInWithGoogle = (e) => {
+    dispatch({ type: "LOGIN_START" });
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        //console.log(result);
+        const user = result.user;
+        dispatch({ type: "LOGIN_SUCCESS", payload: user });
+        navigate("/");
+        window.location.reload();
+      })
+      .catch((error) => {
+        dispatch({ type: "LOGIN_FAILURE" });
+      });
+  };
+
+  //console.log(inputs);
 
   return (
     <div className="login">
@@ -110,7 +125,8 @@ const Login = () => {
           <Link
             to="#"
             className="facebook google"
-            style={{ textDecoration: "none" }}>
+            style={{ textDecoration: "none" }}
+            onClick={signInWithGoogle}>
             <img src={Google} alt="Google Icon" className="google-img" />
             <span>Login with Google</span>
           </Link>

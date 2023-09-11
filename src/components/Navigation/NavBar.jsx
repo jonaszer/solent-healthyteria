@@ -42,7 +42,11 @@ const NavBar = () => {
               </Link>
             </ul>
             <div className="profile">
-              <img className="profile-img" src={Avatar} alt="Profile" />
+              <img
+                className="profile-img"
+                src={currentUser.photoURL ? currentUser.photoURL : Avatar}
+                alt="Profile"
+              />
               <div className="name-signout-wrapper">
                 <span className="profile-name">{currentUser.displayName}</span>
                 {

@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./mobileNavOverlay.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const MobileNavOverlay = ({ onClose }) => {
+  const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+  };
+
   return (
     <div className="mobile-nav-overlay">
       <svg
@@ -20,7 +29,9 @@ const MobileNavOverlay = ({ onClose }) => {
           <Link to={"/menu"}>MENU</Link>
         </li>
         <li>
-          <Link to={"/register"}>LOGIN</Link>
+          <span onClick={handleLogout}>
+            <Link to={"#"}>SIGN OUT</Link>
+          </span>
         </li>
       </ul>
     </div>

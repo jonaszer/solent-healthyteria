@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -9,6 +9,7 @@ import {
 import Google from "../../assets/google.png";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -19,6 +20,8 @@ const Login = () => {
   const [toggleEye, setToggleEye] = useState(false);
   const [inputType, setInputType] = useState("password");
   const navigate = useNavigate();
+
+  const { dispatch } = useContext(AuthContext);
 
   const handleToggle = (e) => {
     setToggleEye(!toggleEye);
@@ -31,17 +34,22 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
 
     try {
       signInWithEmailAndPassword(auth, inputs.email, inputs.password).then(
         (userCredential) => {
           // Signed in
           const user = userCredential.user;
-          // ...
+          dispatch({ type: "LOGIN_SUCCESS", payload: user });
+          //console.log(user);
           navigate("/");
+          window.location.reload();
         }
       );
-    } catch (error) {}
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE" });
+    }
   };
 
   console.log(inputs);

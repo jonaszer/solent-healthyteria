@@ -1,5 +1,5 @@
 import React from "react";
-import "./MobileNavOverlay.css";
+import "./mobileNavOverlay.css";
 import { Link } from "react-router-dom";
 
 const MobileNavOverlay = ({ onClose }) => {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./NavBar.css";
+import "./navBar.css";
 import Logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import MobileNavOverlay from "./MobileNavOverlay";

@@ -5,26 +5,21 @@ import {
   Navigate,
 } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import Title from "./pages/TitlePage/Title";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
 
   const AuthRoute = ({ children }) => {
-    return currentUser ? children : <Navigate to={"/login"} />;
+    return currentUser ? children : <Navigate to={"/"} />;
   };
 
   const router = createBrowserRouter([
     {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/register",
-      element: <Register />,
+      path: "/",
+      element: <Title />,
     },
     {
       path: "/index",

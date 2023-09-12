@@ -17,7 +17,7 @@ const NavBar = () => {
 
   const handleLogout = (e) => {
     dispatch({ type: "LOGOUT" });
-    navigate("/login");
+    navigate("/");
   };
 
   const { currentUser } = useContext(AuthContext);

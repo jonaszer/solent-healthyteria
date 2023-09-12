@@ -9,7 +9,7 @@ const MobileNavOverlay = ({ onClose }) => {
 
   const handleLogout = (e) => {
     dispatch({ type: "LOGOUT" });
-    navigate("/login");
+    navigate("/");
   };
 
   return (

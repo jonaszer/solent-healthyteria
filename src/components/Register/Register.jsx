@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./register.css";
-import FormInput from "../../components/FormInput/FormInput";
+import FormInput from "../FormInput/FormInput";
 import { Link, useNavigate } from "react-router-dom";
 import { FacebookRounded } from "@mui/icons-material";
 import Google from "../../assets/google.png";
@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 
-const Register = () => {
+const Register = ({ onClose }) => {
   const { dispatch } = useContext(AuthContext);
   const [inputValues, setInputValues] = useState({
     name: "",
@@ -118,6 +118,7 @@ const Register = () => {
 
   return (
     <div className="register">
+      <div className="register-overlay" onClick={onClose}></div>
       <form>
         <h2>Registration</h2>
         {inputs.map((input) => (
@@ -128,20 +129,12 @@ const Register = () => {
             onChange={handleChange}
           />
         ))}
-        <button type="submit" onClick={handleRegister}>
-          Register
+        <button
+          className="submit-button"
+          type="submit"
+          onClick={handleRegister}>
+          Submit
         </button>
-
-        <div className="form-link">
-          <span>Already have an account?</span>
-          <Link
-            to={"/login"}
-            className="form-signup"
-            style={{ textDecoration: "none" }}>
-            {" "}
-            Sign In
-          </Link>
-        </div>
         <div className="line"></div>
         <div className="media-options">
           <Link

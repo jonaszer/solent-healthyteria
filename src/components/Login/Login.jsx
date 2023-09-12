@@ -11,7 +11,7 @@ import { auth, facebookProvider, provider } from "../../firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 
-const Login = () => {
+const Login = ({ onClose }) => {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -85,73 +85,65 @@ const Login = () => {
   //console.log(inputs);
 
   return (
-    <div className="login">
-      <form>
-        <h2>Sign In</h2>
-        <div className="form-input">
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Email"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-input">
-          <input
-            type={inputType}
-            name="password"
-            id="password"
-            placeholder="Password"
-            onChange={handleChange}
-            required
-          />
-          <div className="eye-icon" onClick={handleToggle}>
-            {toggleEye ? <Visibility /> : <VisibilityOff />}
-          </div>
-        </div>
-
-        <button type="submit" onClick={handleLogin}>
-          Sign In
-        </button>
-
-        <div className="form-link">
-          <span>Not a member yet?</span>
-          <Link
-            to={"/register"}
-            className="form-signup"
-            style={{ textDecoration: "none" }}>
-            {" "}
-            Sign Up
-          </Link>
-        </div>
-        <div className="line"></div>
-        <div className="media-options">
-          <Link
-            to="#"
-            className="facebook"
-            style={{ textDecoration: "none" }}
-            onClick={signInWithFacebook}>
-            <FacebookRounded
-              className="facebook-icon"
-              style={{ width: "30px", height: "30px" }}
+    <>
+      <div className="login">
+        <div className="login-overlay" onClick={onClose}></div>
+        <form>
+          <h2>Sign In</h2>
+          <div className="form-input">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Email"
+              onChange={handleChange}
+              required
             />
-            <span>Login with Facebook</span>
-          </Link>
-        </div>
-        <div className="media-options">
-          <Link
-            to="#"
-            className="facebook google"
-            style={{ textDecoration: "none" }}
-            onClick={signInWithGoogle}>
-            <img src={Google} alt="Google Icon" className="google-img" />
-            <span>Login with Google</span>
-          </Link>
-        </div>
-      </form>
-    </div>
+          </div>
+          <div className="form-input">
+            <input
+              type={inputType}
+              name="password"
+              id="password"
+              placeholder="Password"
+              onChange={handleChange}
+              required
+            />
+            <div className="eye-icon" onClick={handleToggle}>
+              {toggleEye ? <Visibility /> : <VisibilityOff />}
+            </div>
+          </div>
+
+          <button className="submit-button" type="submit" onClick={handleLogin}>
+            Proceed
+          </button>
+          <div className="line"></div>
+          <div className="media-options">
+            <Link
+              to="#"
+              className="facebook"
+              style={{ textDecoration: "none" }}
+              onClick={signInWithFacebook}>
+              <FacebookRounded
+                className="facebook-icon"
+                style={{ width: "30px", height: "30px" }}
+              />
+              <span>Login with Facebook</span>
+            </Link>
+          </div>
+          <div className="media-options">
+            <Link
+              to="#"
+              className="facebook google"
+              style={{ textDecoration: "none" }}
+              onClick={signInWithGoogle}>
+              <img src={Google} alt="Google Icon" className="google-img" />
+              <span>Login with Google</span>
+            </Link>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

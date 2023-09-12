@@ -7,7 +7,7 @@ import {
   VisibilityOff,
 } from "@mui/icons-material";
 import Google from "../../assets/google.png";
-import { auth, provider } from "../../firebase";
+import { auth, facebookProvider, provider } from "../../firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -43,7 +43,7 @@ const Login = () => {
           const user = userCredential.user;
           dispatch({ type: "LOGIN_SUCCESS", payload: user });
           //console.log(user);
-          navigate("/");
+          navigate("/index");
           window.location.reload();
         }
       );
@@ -59,7 +59,22 @@ const Login = () => {
         //console.log(result);
         const user = result.user;
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
-        navigate("/");
+        navigate("/index");
+        window.location.reload();
+      })
+      .catch((error) => {
+        dispatch({ type: "LOGIN_FAILURE" });
+      });
+  };
+
+  const signInWithFacebook = (e) => {
+    dispatch({ type: "LOGIN_START" });
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        console.log(result);
+        const user = result.user;
+        dispatch({ type: "LOGIN_SUCCESS", payload: user });
+        navigate("/index");
         window.location.reload();
       })
       .catch((error) => {
@@ -113,7 +128,11 @@ const Login = () => {
         </div>
         <div className="line"></div>
         <div className="media-options">
-          <Link to="#" className="facebook" style={{ textDecoration: "none" }}>
+          <Link
+            to="#"
+            className="facebook"
+            style={{ textDecoration: "none" }}
+            onClick={signInWithFacebook}>
             <FacebookRounded
               className="facebook-icon"
               style={{ width: "30px", height: "30px" }}

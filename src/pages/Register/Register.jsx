@@ -4,8 +4,12 @@ import FormInput from "../../components/FormInput/FormInput";
 import { Link, useNavigate } from "react-router-dom";
 import { FacebookRounded } from "@mui/icons-material";
 import Google from "../../assets/google.png";
-import { auth, provider } from "../../firebase";
-import { updateProfile, createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, facebookProvider, provider } from "../../firebase";
+import {
+  updateProfile,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 
 const Register = () => {
@@ -89,7 +93,22 @@ const Register = () => {
         //console.log(result);
         const user = result.user;
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
-        navigate("/");
+        navigate("/index");
+        window.location.reload();
+      })
+      .catch((error) => {
+        dispatch({ type: "LOGIN_FAILURE" });
+      });
+  };
+
+  const signInWithFacebook = (e) => {
+    dispatch({ type: "LOGIN_START" });
+    signInWithPopup(auth, facebookProvider)
+      .then((result) => {
+        console.log(result);
+        const user = result.user;
+        dispatch({ type: "LOGIN_SUCCESS", payload: user });
+        navigate("/index");
         window.location.reload();
       })
       .catch((error) => {
@@ -125,7 +144,11 @@ const Register = () => {
         </div>
         <div className="line"></div>
         <div className="media-options">
-          <Link to="#" className="facebook" style={{ textDecoration: "none" }}>
+          <Link
+            to="#"
+            className="facebook"
+            style={{ textDecoration: "none" }}
+            onClick={signInWithFacebook}>
             <FacebookRounded
               className="facebook-icon"
               style={{ width: "30px", height: "30px" }}

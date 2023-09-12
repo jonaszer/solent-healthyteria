@@ -27,7 +27,7 @@ function App() {
       element: <Register />,
     },
     {
-      path: "/",
+      path: "/index",
       element: (
         <AuthRoute>
           <HomePage />

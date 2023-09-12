@@ -23,10 +23,13 @@ const MobileNavOverlay = ({ onClose }) => {
       </svg>
       <ul>
         <li>
-          <Link to={"/"}>HOME</Link>
+          <Link to={"/index"}>HOME</Link>
         </li>
         <li>
           <Link to={"/menu"}>MENU</Link>
+        </li>
+        <li>
+          <Link to={"/cart"}>CART</Link>
         </li>
         <li>
           <span onClick={handleLogout}>

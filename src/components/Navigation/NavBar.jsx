@@ -28,17 +28,20 @@ const NavBar = () => {
       <nav className="navbar">
         <div className="nav-items">
           <div>
-            <Link to={"/"}>
+            <Link to={"/index"}>
               <img className="nav-logo" src={Logo} alt="Logo" />
             </Link>
           </div>
           <div className="menu-profile-wrapper">
             <ul className="nav-links">
-              <Link className="link" to={"/"}>
+              <Link className="link" to={"/index"}>
                 HOME
               </Link>
               <Link className="link" to={"/menu"}>
                 MENU
+              </Link>
+              <Link className="link" to={"/cart"}>
+                CART
               </Link>
             </ul>
             <div className="profile">

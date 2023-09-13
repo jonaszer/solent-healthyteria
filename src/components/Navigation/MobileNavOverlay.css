@@ -18,6 +18,7 @@
   }
   .mobile-nav-overlay ul li {
     margin-bottom: 1em;
+    font-weight: 300;
   }
   .mobile-nav-overlay ul li a {
     text-decoration: none;

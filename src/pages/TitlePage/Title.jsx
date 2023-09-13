@@ -30,8 +30,9 @@ const Title = () => {
                   University. As a cherished member, you can savor the goodness
                   of nutritious culinary delights. Order your favorite,
                   health-packed meals and treat your body to vitality with every
-                  bite. Bon appétit!
+                  bite.
                 </h3>
+                <h2>Bon appétit!</h2>
                 <div className="title-buttons">
                   <button className="title-button" onClick={toggleSignIn}>
                     Sign In

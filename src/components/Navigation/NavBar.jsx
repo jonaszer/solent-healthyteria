@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import MobileNavOverlay from "./MobileNavOverlay";
 import { AuthContext } from "../../context/AuthContext";
 import Avatar from "../../assets/avatar.png";
+import { FaShoppingCart } from "react-icons/fa";
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,6 +24,16 @@ const NavBar = () => {
   const { currentUser } = useContext(AuthContext);
   console.log(currentUser);
 
+  const cart = (
+    <span className="cart">
+      <Link className="link" to={"/cart"}>
+        Cart
+        <FaShoppingCart size={20} style={{ marginLeft: 5 }} />
+        <p>0</p>
+      </Link>
+    </span>
+  );
+
   return (
     <>
       <nav className="navbar">
@@ -34,15 +45,10 @@ const NavBar = () => {
           </div>
           <div className="menu-profile-wrapper">
             <ul className="nav-links">
-              <Link className="link" to={"/index"}>
-                HOME
-              </Link>
               <Link className="link" to={"/menu"}>
-                MENU
+                Menu
               </Link>
-              <Link className="link" to={"/cart"}>
-                CART
-              </Link>
+              {cart}
             </ul>
             <div className="profile">
               <img
@@ -61,6 +67,7 @@ const NavBar = () => {
               </div>
             </div>
           </div>
+          <span className="mobile-cart">{cart}</span>
           <svg
             className="hamburger-menu"
             xmlns="http://www.w3.org/2000/svg"

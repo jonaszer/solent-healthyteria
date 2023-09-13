@@ -68,7 +68,7 @@
     text-decoration: none;
     font-size: 1.6em;
     color: white;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .link:hover {
@@ -82,6 +82,26 @@
   .hamburger-menu {
     display: none;
   }
+
+  .link > p {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    line-height: 1.4em;
+    font-weight: 500;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 100%;
+    border: 2px solid white;
+    color: white;
+    font-size: 0.5em;
+    top: -1.5em;
+    pointer-events: none;
+  }
+
+  .mobile-cart {
+    display: none;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -92,6 +112,7 @@
 
   .nav-items {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     height: 100%;
     width: 100%;
@@ -103,15 +124,16 @@
   .nav-links {
     display: flex;
     flex-direction: row;
-    gap: 2em;
+    gap: 1.5em;
     list-style: none;
+    line-height: 2em;
   }
 
   .link {
     text-decoration: none;
     font-size: 1.2em;
     color: white;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .menu-profile-wrapper {
@@ -168,6 +190,26 @@
   .hamburger-menu {
     display: none;
   }
+
+  .link > p {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    line-height: 1.5em;
+    font-weight: 500;
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 100%;
+    border: 1px solid white;
+    color: white;
+    font-size: 0.5em;
+    top: -1.5em;
+    pointer-events: none;
+  }
+
+  .mobile-cart {
+    display: none;
+  }
 }
 
 @media (max-width: 576px) {
@@ -195,13 +237,19 @@
   }
 
   .nav-logo {
-    width: 150px;
+    width: 100px;
   }
 
   .hamburger-menu {
     display: flex;
-    width: 2em;
+    width: 1.5em;
     fill: white;
     cursor: pointer;
+  }
+
+  .mobile-cart {
+    display: inline-block;
+    position: absolute;
+    right: 15%;
   }
 }

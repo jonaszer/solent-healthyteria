@@ -45,7 +45,7 @@ const NavBar = () => {
           </div>
           <div className="menu-profile-wrapper">
             <ul className="nav-links">
-              <Link className="link" to={"/menu"}>
+              <Link className="link" to={"#"}>
                 Menu
               </Link>
               {cart}

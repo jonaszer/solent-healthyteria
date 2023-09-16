@@ -1,0 +1,60 @@
+@media (min-width: 1024px) {
+  .all-products-container {
+    width: 100%;
+    height: auto;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 2em;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(25, 30, 22);
+    overflow: hidden;
+  }
+
+  .all-products-container h1 {
+    display: flex;
+    justify-content: center;
+    font-family: "WindSong";
+    font-weight: 300;
+    font-size: 4em;
+    color: #65725c;
+    margin-top: 0.5em;
+  }
+
+  .category {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sandwich-items-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2em;
+  }
+
+  .category-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    margin: 2em 0 2em 0;
+  }
+
+  .category-title h2 {
+    font-family: "WindSong";
+    font-size: 3em;
+    margin: 0;
+  }
+
+  .chevron {
+    width: 20px;
+    fill: white;
+    cursor: pointer;
+  }
+
+  .chevron:hover {
+    fill: #b7ce63;
+  }
+}

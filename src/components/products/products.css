@@ -1,60 +1,97 @@
-@media (min-width: 1024px) {
+.all-products-container {
+  width: 100%;
+  height: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 2em;
+  padding-top: 100px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(25, 30, 22);
+  overflow: hidden;
+}
+
+.all-products-container h1 {
+  display: flex;
+  justify-content: center;
+  font-family: "WindSong";
+  font-weight: 300;
+  font-size: 4em;
+  color: #a3f642;
+  margin-top: 0.5em;
+}
+
+.category {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sandwich-items-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2em;
+}
+
+.category-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+  margin: 2em 0 2em 0;
+}
+
+.category-title h2 {
+  font-family: "WindSong";
+  font-size: 3em;
+  margin: 0;
+}
+
+.chevron {
+  width: 20px;
+  fill: white;
+  cursor: pointer;
+}
+
+.chevron:hover {
+  fill: #a3f642;
+}
+
+@media (max-width: 1024px) {
+  .sandwich-items-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .all-products-container {
-    width: 100%;
-    height: auto;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-bottom: 2em;
-    display: grid;
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sandwich-items-container {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: rgb(25, 30, 22);
-    overflow: hidden;
+  }
+
+  .all-products-container {
+    padding-top: 80px;
   }
 
   .all-products-container h1 {
-    display: flex;
-    justify-content: center;
-    font-family: "WindSong";
-    font-weight: 300;
-    font-size: 4em;
-    color: #a3f642;
-    margin-top: 0.5em;
-  }
-
-  .category {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sandwich-items-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2em;
+    font-size: 3em;
   }
 
   .category-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3em;
-    margin: 2em 0 2em 0;
+    gap: 2em;
   }
 
   .category-title h2 {
-    font-family: "WindSong";
-    font-size: 3em;
-    margin: 0;
+    font-size: 2em;
   }
 
   .chevron {
-    width: 20px;
-    fill: white;
-    cursor: pointer;
-  }
-
-  .chevron:hover {
-    fill: #a3f642;
+    width: 15px;
   }
 }

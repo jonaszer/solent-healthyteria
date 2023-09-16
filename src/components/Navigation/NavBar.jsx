@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./navBar.css";
 import Logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,6 +11,37 @@ const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let lastScrollTop = 0;
+
+    function handleScroll() {
+      let currentScrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      const navbar = document.querySelector(".navbar");
+
+      if (navbar) {
+        // Ensure navbar exists
+        if (currentScrollTop > lastScrollTop) {
+          // User is scrolling down
+          navbar.classList.add("navbar-hidden");
+        } else {
+          // User is scrolling up
+          navbar.classList.remove("navbar-hidden");
+        }
+      }
+
+      lastScrollTop = currentScrollTop;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -45,7 +76,7 @@ const NavBar = () => {
           </div>
           <div className="menu-profile-wrapper">
             <ul className="nav-links">
-              <Link className="link" to={"#"}>
+              <Link className="link" to={"/index"}>
                 Menu
               </Link>
               {cart}

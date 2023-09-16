@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Title from "./pages/TitlePage/Title";
+import Cart from "./pages/Cart/Cart";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -28,6 +29,10 @@ function App() {
           <HomePage />
         </AuthRoute>
       ),
+    },
+    {
+      path: "/cart",
+      element: <Cart />,
     },
   ]);
   return (

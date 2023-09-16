@@ -1,5 +1,5 @@
 .card {
-  width: 350px;
+  max-width: 350px;
   height: 300px;
   background-color: rgba(255, 255, 255);
   transition: 0.3s ease-in-out;
@@ -38,7 +38,7 @@
   display: flex;
   justify-content: center;
   width: 80%;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 .card-price-container {
@@ -50,7 +50,7 @@
 
 .price-container {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   width: 50%;
   font-size: 1.3em;
   margin-left: 1em;
@@ -60,7 +60,7 @@
 .card-button-container {
   width: 50%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-right: 1em;
 }
 
@@ -72,4 +72,16 @@
   width: 60%;
   height: 30px;
   font-size: 1em;
+}
+
+@media (max-width: 1024px) {
+  .card-title-container h4 {
+    font-size: 0.8em;
+  }
+}
+
+@media (max-width: 600px) {
+  .card-title-container h4 {
+    font-size: 0.8em;
+  }
 }

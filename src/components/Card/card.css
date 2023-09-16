@@ -1,7 +1,7 @@
 .card {
   width: 350px;
-  height: 350px;
-  background-color: rgb(204, 204, 204, 0.8);
+  height: 300px;
+  background-color: rgba(255, 255, 255);
   transition: 0.3s ease-in-out;
 }
 
@@ -11,7 +11,7 @@
 
 .image-container {
   width: 100%;
-  height: 60%;
+  height: 70%;
   padding: 10px;
   overflow: hidden;
 }
@@ -24,11 +24,12 @@
 
 .card-details {
   margin: 0 10px 10px 10px;
-  height: 40%;
+  height: 30%;
 }
 
 .card-title-container {
   width: 100%;
+  height: 50%;
   display: flex;
   justify-content: center;
 }
@@ -37,5 +38,38 @@
   display: flex;
   justify-content: center;
   width: 80%;
-  font-size: 1.1em;
+  font-size: 1em;
+}
+
+.card-price-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.price-container {
+  display: flex;
+  justify-content: start;
+  width: 50%;
+  font-size: 1.3em;
+  margin-left: 1em;
+  color: #719420;
+}
+
+.card-button-container {
+  width: 50%;
+  display: flex;
+  justify-content: end;
+  margin-right: 1em;
+}
+
+.card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: none;
+  width: 60%;
+  height: 30px;
+  font-size: 1em;
 }

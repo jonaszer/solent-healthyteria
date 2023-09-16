@@ -60,7 +60,7 @@ const Products = () => {
   return (
     <>
       <div className="all-products-container">
-        <h1>Solent menu</h1>
+        <h1>Menu</h1>
         <div className="category">
           <div className="category-title">
             <div onClick={decrementCategory}>{chevronLeft}</div>

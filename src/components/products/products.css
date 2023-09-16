@@ -18,7 +18,7 @@
     font-family: "WindSong";
     font-weight: 300;
     font-size: 4em;
-    color: #65725c;
+    color: #a3f642;
     margin-top: 0.5em;
   }
 
@@ -55,6 +55,6 @@
   }
 
   .chevron:hover {
-    fill: #b7ce63;
+    fill: #a3f642;
   }
 }

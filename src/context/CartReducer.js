@@ -31,17 +31,22 @@ const cartReducer = (state, action) => {
         };
       }
 
-    case "REMOVE_FROM_CART":
-      const itemsAfterRemoval = state.items.reduce((accumulator, item) => {
-        if (item.id === action.id && item.quantity > 1) {
-          accumulator.push({ ...item, quantity: item.quantity - 1 });
-        } else if (item.id !== action.id) {
-          accumulator.push(item);
-        }
-        // if item.id matches and quantity is 1, we simply exclude the item
-        return accumulator;
-      }, []);
+    case "ADJUST_QUANTITY":
+      return {
+        ...state,
+        items: state.items
+          .map((item) =>
+            item.id === action.id
+              ? { ...item, quantity: item.quantity + action.amount }
+              : item
+          )
+          .filter((item) => item.quantity > 0), // This ensures items with 0 or negative quantities are removed
+      };
 
+    case "REMOVE_FROM_CART":
+      const itemsAfterRemoval = state.items.filter(
+        (item) => item.id !== action.id
+      );
       return {
         ...state,
         items: itemsAfterRemoval,

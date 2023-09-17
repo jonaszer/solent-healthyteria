@@ -35,9 +35,24 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const adjustQuantity = (id, amount) => {
+    console.log(`Adjusting quantity for item with id: ${id} by ${amount}`);
+    dispatch({
+      type: "ADJUST_QUANTITY",
+      id: id,
+      amount: amount,
+    });
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart: state.items, dispatch, addToCart, removeFromCart }}>
+      value={{
+        cart: state.items,
+        dispatch,
+        addToCart,
+        removeFromCart,
+        adjustQuantity,
+      }}>
       {children}
     </CartContext.Provider>
   );

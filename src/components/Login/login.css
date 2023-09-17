@@ -22,7 +22,7 @@
   z-index: -1;
 }
 
-form {
+.login > form {
   background-color: #384033;
   max-width: 400px;
   padding: 20px;

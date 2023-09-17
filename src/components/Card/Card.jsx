@@ -27,7 +27,7 @@ function Card(props) {
           </div>
           <div className="card-price-container">
             <div className="price-container">
-              <h4>£{props.price}</h4>
+              <h4>£ {props.price}</h4>
             </div>
             <div className="card-button-container">
               <button className="card-button" onClick={handleAddToCart}>

@@ -1,7 +1,15 @@
+.navbar-hidden {
+  transform: translateY(-100%);
+  transition: 0.3s ease-in-out;
+}
+
 @media (min-width: 1024px) {
   .navbar {
     height: 100px;
     background-color: #384033;
+    position: fixed;
+    width: 100%;
+    transition: 0.3s ease-in-out;
   }
 
   .nav-items {
@@ -108,6 +116,10 @@
   .navbar {
     height: 80px;
     background-color: #384033;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    transition: 0.3s ease-in-out;
   }
 
   .nav-items {
@@ -216,6 +228,7 @@
   .navbar {
     height: 80px;
     background-color: #384033;
+    transition: 0.3s ease-in-out;
   }
 
   .nav-links {

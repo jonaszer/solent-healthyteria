@@ -40,6 +40,7 @@ const NavBar = () => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const handleLogout = () => {
+    localStorage.clear();
     dispatch({ type: "LOGOUT" });
     navigate("/");
   };

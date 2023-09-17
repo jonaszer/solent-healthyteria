@@ -209,7 +209,7 @@ const Cart = () => {
                       name="time"
                       onChange={handleTimeChange}
                       required>
-                      {Array.from({ length: 13 }, (_, i) => i * 0.5 + 9).map(
+                      {Array.from({ length: 9 }, (_, i) => i * 0.5 + 10).map(
                         (hour) => {
                           const time = hour.toFixed(2).replace(".", ":");
                           return (

@@ -1,5 +1,6 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
 import CartReducer from "./CartReducer";
+import { AuthContext } from "./AuthContext";
 
 const CartContext = createContext();
 
@@ -8,16 +9,21 @@ const initialState = {
 };
 
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(CartReducer, initialState, () => {
-    // Try to get the cart from local storage on initial load
-    const localData = localStorage.getItem("cart");
-    return localData ? { items: JSON.parse(localData) } : initialState;
-  });
+  const { currentUser } = useContext(AuthContext);
+  const [state, dispatch] = useReducer(CartReducer, initialState);
 
   useEffect(() => {
-    // Whenever the cart changes, save it to local storage
-    localStorage.setItem("cart", JSON.stringify(state.items));
-  }, [state.items]);
+    if (currentUser) {
+      const localData = localStorage.getItem(`cart_${currentUser.uid}`);
+      if (localData) {
+        dispatch({ type: "SET_CART_ITEMS", items: JSON.parse(localData) });
+      } else {
+        dispatch({ type: "SET_CART_ITEMS", items: [] });
+      }
+    } else {
+      dispatch({ type: "SET_CART_ITEMS", items: [] });
+    }
+  }, [currentUser]);
 
   const addToCart = (item) => {
     console.log("addToCart function called with item:", item);

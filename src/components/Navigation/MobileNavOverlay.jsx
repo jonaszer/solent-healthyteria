@@ -8,6 +8,7 @@ const MobileNavOverlay = ({ onClose }) => {
   const navigate = useNavigate();
 
   const handleLogout = (e) => {
+    localStorage.clear();
     dispatch({ type: "LOGOUT" });
     navigate("/");
   };

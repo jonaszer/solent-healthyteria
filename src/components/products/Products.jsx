@@ -71,6 +71,7 @@ const Products = () => {
             {filteredProducts.map((product) => (
               <Card
                 key={product.id}
+                id={product.id}
                 imageUrl={product.imageUrl}
                 title={product.title}
                 price={product.price}

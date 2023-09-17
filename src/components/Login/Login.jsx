@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FacebookRounded,
   Visibility,
@@ -21,9 +21,15 @@ const Login = ({ onClose }) => {
   const [inputType, setInputType] = useState("password");
   const navigate = useNavigate();
 
-  const { dispatch } = useContext(AuthContext);
+  const { currentUser, dispatch } = useContext(AuthContext);
 
-  const handleToggle = (e) => {
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/index");
+    }
+  }, [currentUser, navigate]);
+
+  const handleToggle = () => {
     setToggleEye(!toggleEye);
     setInputType(inputType === "password" ? "text" : "password");
   };
@@ -32,57 +38,46 @@ const Login = ({ onClose }) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
 
     try {
-      signInWithEmailAndPassword(auth, inputs.email, inputs.password).then(
-        (userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          dispatch({ type: "LOGIN_SUCCESS", payload: user });
-          //console.log(user);
-          navigate("/index");
-          window.location.reload();
-        }
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        inputs.email,
+        inputs.password
       );
+      const user = userCredential.user;
+      dispatch({ type: "LOGIN_SUCCESS", payload: user });
     } catch (error) {
-      dispatch({ type: "LOGIN_FAILURE" });
+      dispatch({ type: "LOGIN_FAILURE", payload: error });
     }
   };
 
-  const signInWithGoogle = (e) => {
+  const signInWithGoogle = () => {
     dispatch({ type: "LOGIN_START" });
     signInWithPopup(auth, provider)
       .then((result) => {
-        //console.log(result);
         const user = result.user;
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
-        navigate("/index");
-        window.location.reload();
       })
       .catch((error) => {
-        dispatch({ type: "LOGIN_FAILURE" });
+        dispatch({ type: "LOGIN_FAILURE", payload: error });
       });
   };
 
-  const signInWithFacebook = (e) => {
+  const signInWithFacebook = () => {
     dispatch({ type: "LOGIN_START" });
     signInWithPopup(auth, facebookProvider)
       .then((result) => {
-        console.log(result);
         const user = result.user;
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
-        navigate("/index");
-        window.location.reload();
       })
       .catch((error) => {
-        dispatch({ type: "LOGIN_FAILURE" });
+        dispatch({ type: "LOGIN_FAILURE", payload: error });
       });
   };
-
-  //console.log(inputs);
 
   return (
     <>
@@ -119,27 +114,19 @@ const Login = ({ onClose }) => {
           </button>
           <div className="line"></div>
           <div className="media-options">
-            <Link
-              to="#"
-              className="facebook"
-              style={{ textDecoration: "none" }}
-              onClick={signInWithFacebook}>
+            <button className="facebook" onClick={signInWithFacebook}>
               <FacebookRounded
                 className="facebook-icon"
                 style={{ width: "30px", height: "30px" }}
               />
               <span>Login with Facebook</span>
-            </Link>
+            </button>
           </div>
           <div className="media-options">
-            <Link
-              to="#"
-              className="facebook google"
-              style={{ textDecoration: "none" }}
-              onClick={signInWithGoogle}>
+            <button className="facebook google" onClick={signInWithGoogle}>
               <img src={Google} alt="Google Icon" className="google-img" />
               <span>Login with Google</span>
-            </Link>
+            </button>
           </div>
         </form>
       </div>

@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./register.css";
 import FormInput from "../FormInput/FormInput";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FacebookRounded } from "@mui/icons-material";
 import Google from "../../assets/google.png";
 import { auth, facebookProvider, provider } from "../../firebase";
@@ -13,7 +13,7 @@ import {
 import { AuthContext } from "../../context/AuthContext";
 
 const Register = ({ onClose }) => {
-  const { dispatch } = useContext(AuthContext);
+  const { currentUser, dispatch } = useContext(AuthContext);
   const [inputValues, setInputValues] = useState({
     name: "",
     email: "",
@@ -22,6 +22,12 @@ const Register = ({ onClose }) => {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/index");
+    }
+  }, [currentUser, navigate]);
 
   const inputs = [
     {
@@ -70,49 +76,47 @@ const Register = ({ onClose }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    if (inputValues.password !== inputValues.confirmPassword) {
+      console.error("Passwords do not match"); // Or display a user-friendly error message
+      return;
+    }
+
     try {
-      await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         inputValues.email,
         inputValues.password
-      ).then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        updateProfile(user, {
-          displayName: inputValues.name,
-        });
-        navigate("/login");
+      );
+      const user = userCredential.user;
+      await updateProfile(user, {
+        displayName: inputValues.name,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error.message); // Handle/display error to the user
+    }
   };
 
-  const signInWithGoogle = (e) => {
+  const signInWithGoogle = () => {
     dispatch({ type: "LOGIN_START" });
     signInWithPopup(auth, provider)
       .then((result) => {
-        //console.log(result);
         const user = result.user;
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
-        navigate("/index");
-        window.location.reload();
       })
       .catch((error) => {
-        dispatch({ type: "LOGIN_FAILURE" });
+        dispatch({ type: "LOGIN_FAILURE", payload: error });
       });
   };
 
-  const signInWithFacebook = (e) => {
+  const signInWithFacebook = () => {
     dispatch({ type: "LOGIN_START" });
     signInWithPopup(auth, facebookProvider)
       .then((result) => {
-        console.log(result);
         const user = result.user;
         dispatch({ type: "LOGIN_SUCCESS", payload: user });
-        navigate("/index");
-        window.location.reload();
       })
       .catch((error) => {
-        dispatch({ type: "LOGIN_FAILURE" });
+        dispatch({ type: "LOGIN_FAILURE", payload: error });
       });
   };
 
@@ -129,35 +133,24 @@ const Register = ({ onClose }) => {
             onChange={handleChange}
           />
         ))}
-        <button
-          className="submit-button"
-          type="submit"
-          onClick={handleRegister}>
+        <button className="submit-button" onClick={handleRegister}>
           Submit
         </button>
         <div className="line"></div>
         <div className="media-options">
-          <Link
-            to="#"
-            className="facebook"
-            style={{ textDecoration: "none" }}
-            onClick={signInWithFacebook}>
+          <button className="facebook" onClick={signInWithFacebook}>
             <FacebookRounded
               className="facebook-icon"
               style={{ width: "30px", height: "30px" }}
             />
             <span>Login with Facebook</span>
-          </Link>
+          </button>
         </div>
         <div className="media-options">
-          <Link
-            to="#"
-            className="facebook google"
-            style={{ textDecoration: "none" }}
-            onClick={signInWithGoogle}>
+          <button className="facebook google" onClick={signInWithGoogle}>
             <img src={Google} alt="Google Icon" className="google-img" />
             <span>Login with Google</span>
-          </Link>
+          </button>
         </div>
       </form>
     </div>

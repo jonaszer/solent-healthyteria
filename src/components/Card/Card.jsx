@@ -1,7 +1,20 @@
 import React from "react";
 import "./card.css";
+import { useCart } from "../../context/CartContext";
 
 function Card(props) {
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    const item = {
+      id: props.id,
+      imageUrl: props.imageUrl,
+      title: props.title,
+      price: props.price,
+    };
+    addToCart(item);
+  };
+
   return (
     <>
       <div className="card">
@@ -17,7 +30,9 @@ function Card(props) {
               <h4>£{props.price}</h4>
             </div>
             <div className="card-button-container">
-              <button className="card-button">Order</button>
+              <button className="card-button" onClick={handleAddToCart}>
+                Order
+              </button>
             </div>
           </div>
         </div>

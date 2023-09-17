@@ -7,6 +7,7 @@ import {
 import HomePage from "./pages/HomePage/HomePage";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
 import Title from "./pages/TitlePage/Title";
 import Cart from "./pages/Cart/Cart";
 
@@ -32,13 +33,19 @@ function App() {
     },
     {
       path: "/cart",
-      element: <Cart />,
+      element: (
+        <AuthRoute>
+          <Cart />
+        </AuthRoute>
+      ),
     },
   ]);
   return (
-    <div className="app">
-      <RouterProvider router={router} />
-    </div>
+    <CartProvider>
+      <div className="app">
+        <RouterProvider router={router} />
+      </div>
+    </CartProvider>
   );
 }
 

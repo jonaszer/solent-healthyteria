@@ -1,0 +1,9 @@
+.cart-container {
+  height: 100vh;
+  padding-top: 100px;
+  background-color: rgb(25, 30, 22);
+}
+
+.cart-container li {
+  color: white;
+}

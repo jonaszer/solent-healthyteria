@@ -23,7 +23,7 @@ const MobileNavOverlay = ({ onClose }) => {
       </svg>
       <ul>
         <li>
-          <Link to={"/menu"}>Menu</Link>
+          <Link to={"/index"}>Menu</Link>
         </li>
         <li>
           <Link to={"/cart"}>Cart</Link>

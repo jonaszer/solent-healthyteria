@@ -21,6 +21,15 @@
   z-index: -1;
 }
 
+.register > form {
+  background-color: #384033;
+  max-width: 400px;
+  padding: 20px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 1);
+}
+
 h2 {
   font-size: 1.6em;
   font-weight: 500;

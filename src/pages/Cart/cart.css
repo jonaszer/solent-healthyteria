@@ -34,7 +34,7 @@
   justify-content: center;
   align-items: center;
   height: 80px;
-  width: 30%;
+  width: 50%;
   background-color: white;
   border-radius: 16px;
 }
@@ -340,6 +340,16 @@ label {
   .total-amount-container {
     align-self: center;
   }
+
+  .empty-cart-p-container {
+    margin-top: 1em;
+    height: 60px;
+    width: 70%;
+  }
+
+  .empty-cart-p-container > p {
+    font-size: 1.5em;
+  }
 }
 
 @media (max-width: 600px) {
@@ -427,5 +437,15 @@ label {
     font-size: 1em;
     color: black;
     font-weight: 400;
+  }
+
+  .empty-cart-p-container {
+    margin-top: 1em;
+    height: 60px;
+    width: 70%;
+  }
+
+  .empty-cart-p-container > p {
+    font-size: 1.5em;
   }
 }

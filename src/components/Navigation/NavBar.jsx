@@ -46,12 +46,14 @@ const NavBar = () => {
 
   const userImage = currentUser?.photoURL || Avatar;
 
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   const cart = (
     <span className="cart">
       <Link className="link" to={"/cart"}>
         Cart
         <FaShoppingCart size={20} style={{ marginLeft: 5 }} />
-        <p>{cartItems.length}</p>
+        <p>{totalItems}</p>
       </Link>
     </span>
   );

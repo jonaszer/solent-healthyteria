@@ -58,6 +58,12 @@ const cartReducer = (state, action) => {
         items: itemsAfterRemoval,
       };
 
+    case "CLEAR_CART":
+      return {
+        ...state,
+        items: [],
+      };
+
     default:
       return state;
   }

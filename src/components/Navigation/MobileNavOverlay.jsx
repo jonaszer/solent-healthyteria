@@ -30,6 +30,9 @@ const MobileNavOverlay = ({ onClose }) => {
           <Link to={"/cart"}>Cart</Link>
         </li>
         <li>
+          <Link to={"/my-orders"}>Orders</Link>
+        </li>
+        <li>
           <span onClick={handleLogout}>
             <Link to={"#"}>Sign Out</Link>
           </span>

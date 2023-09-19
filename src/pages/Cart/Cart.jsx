@@ -1,16 +1,18 @@
 import React, { useState } from "react";
+import { db, auth } from "../../firebase";
 import { useCart } from "../../context/CartContext";
+import { collection, addDoc } from "firebase/firestore";
 import "./cart.css";
 import NavBar from "../../components/Navigation/NavBar";
 import Footer from "../../components/Footer/Footer";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 
 const Cart = () => {
-  const { cart, removeFromCart, adjustQuantity } = useCart();
+  const { cart, removeFromCart, adjustQuantity, clearCart } = useCart();
   const [selectionType, setSelectionType] = useState("");
   const [tableNumber, setTableNumber] = useState(1);
   const [labNumber, setLabNumber] = useState(101);
-  const [time, setTime] = useState("09:00");
+  const [time, setTime] = useState("10:00");
 
   const handleTableChange = (e) => {
     setTableNumber(e.target.value);
@@ -24,17 +26,44 @@ const Cart = () => {
     setTime(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // prevent default form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     if (!selectionType) {
       alert("Please select a Table or Lab");
       return;
     }
 
-    if (selectionType === "table") {
-      alert(`Order will be delivered to Table ${tableNumber} at ${time}`);
-    } else if (selectionType === "lab") {
-      alert(`Order will be delivered to Lab ${labNumber} at ${time}`);
+    const location = selectionType === "table" ? tableNumber : labNumber;
+    const totalPrice = cart.reduce((accumulator, item) => {
+      return accumulator + item.price * item.quantity;
+    }, 0);
+    const orderTime = new Date();
+    const formattedOrderTime = `${orderTime.getHours()}:${orderTime.getMinutes()}:${orderTime.getSeconds()}`;
+
+    const orderDetails = {
+      userId: auth.currentUser.uid,
+      email: auth.currentUser.email,
+      items: cart.map((item) => ({
+        id: item.id,
+        title: item.title,
+        quantity: item.quantity,
+        price: item.price,
+        subtotal: item.price * item.quantity,
+      })),
+      locationType: selectionType,
+      locationNumber: selectionType === "table" ? tableNumber : labNumber,
+      selectedTime: time,
+      orderTime: formattedOrderTime,
+      totalOrderPrice: totalPrice,
+    };
+
+    try {
+      await addDoc(collection(db, "orders"), orderDetails);
+      clearCart();
+      alert(`Order placed for ${selectionType} ${location} at ${time}`);
+    } catch (error) {
+      alert(`Error placing order: ${error.message}`);
     }
   };
 
@@ -174,7 +203,7 @@ const Cart = () => {
                           {Array.from({ length: 10 }, (_, i) => i + 1).map(
                             (number) => (
                               <option key={number} value={number}>
-                                Table {number}
+                                {number}
                               </option>
                             )
                           )}
@@ -195,7 +224,7 @@ const Cart = () => {
                             Array.from({ length: 5 }, (_, j) => base + j).map(
                               (number) => (
                                 <option key={number} value={number}>
-                                  Lab {number}
+                                  {number}
                                 </option>
                               )
                             )
@@ -209,9 +238,12 @@ const Cart = () => {
                       name="time"
                       onChange={handleTimeChange}
                       required>
-                      {Array.from({ length: 9 }, (_, i) => i * 0.5 + 10).map(
+                      {Array.from({ length: 11 }, (_, i) => i * 0.5 + 10).map(
                         (hour) => {
-                          const time = hour.toFixed(2).replace(".", ":");
+                          const wholeHour = Math.floor(hour);
+                          const minutes =
+                            hour - wholeHour === 0.5 ? "30" : "00";
+                          const time = `${wholeHour}:${minutes}`;
                           return (
                             <option key={time} value={time}>
                               {time}

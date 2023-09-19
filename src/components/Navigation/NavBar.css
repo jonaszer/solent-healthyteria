@@ -95,10 +95,10 @@
     display: inline-block;
     position: relative;
     text-align: center;
-    line-height: 1.4em;
+    line-height: 1.8em;
     font-weight: 500;
-    width: 1.6em;
-    height: 1.6em;
+    width: 2em;
+    height: 2em;
     border-radius: 100%;
     border: 2px solid white;
     color: white;
@@ -264,5 +264,14 @@
     display: inline-block;
     position: absolute;
     right: 15%;
+  }
+
+  .link > p {
+    line-height: 1.8em;
+    font-weight: 500;
+    width: 2em;
+    height: 2em;
+    font-size: 0.5em;
+    top: -2em;
   }
 }

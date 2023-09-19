@@ -17,16 +17,20 @@ export const CartProvider = ({ children }) => {
       const localData = localStorage.getItem(`cart_${currentUser.uid}`);
       if (localData) {
         dispatch({ type: "SET_CART_ITEMS", items: JSON.parse(localData) });
-      } else {
-        dispatch({ type: "SET_CART_ITEMS", items: [] });
       }
-    } else {
-      dispatch({ type: "SET_CART_ITEMS", items: [] });
     }
   }, [currentUser]);
 
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem(
+        `cart_${currentUser.uid}`,
+        JSON.stringify(state.items)
+      );
+    }
+  }, [state.items, currentUser]);
+
   const addToCart = (item) => {
-    console.log("addToCart function called with item:", item);
     dispatch({
       type: "ADD_TO_CART",
       item: item,
@@ -34,7 +38,6 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (id) => {
-    console.log("removeFromCart function called with id:", id);
     dispatch({
       type: "REMOVE_FROM_CART",
       id: id,
@@ -42,12 +45,18 @@ export const CartProvider = ({ children }) => {
   };
 
   const adjustQuantity = (id, amount) => {
-    console.log(`Adjusting quantity for item with id: ${id} by ${amount}`);
     dispatch({
       type: "ADJUST_QUANTITY",
       id: id,
       amount: amount,
     });
+  };
+
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+    if (currentUser) {
+      localStorage.removeItem(`cart_${currentUser.uid}`);
+    }
   };
 
   return (
@@ -58,6 +67,7 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         adjustQuantity,
+        clearCart,
       }}>
       {children}
     </CartContext.Provider>

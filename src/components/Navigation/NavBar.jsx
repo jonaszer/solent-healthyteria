@@ -59,6 +59,15 @@ const NavBar = () => {
     </span>
   );
 
+  const mobileCart = (
+    <span className="cart">
+      <Link className="link" to={"/cart"}>
+        <FaShoppingCart size={22} style={{ marginLeft: 5 }} />
+        <p>{totalItems}</p>
+      </Link>
+    </span>
+  );
+
   return (
     <>
       <nav className={`navbar ${hidden ? "navbar-hidden" : ""}`}>
@@ -73,6 +82,9 @@ const NavBar = () => {
               <Link className="link" to={"/index"}>
                 Menu
               </Link>
+              <Link className="link" to={"/my-orders"}>
+                Orders
+              </Link>
               {cart}
             </ul>
             <div className="profile">
@@ -85,8 +97,8 @@ const NavBar = () => {
               </div>
             </div>
           </div>
-          <span className="mobile-cart">{cart}</span>
-          <FaBars className="hamburger-menu" onClick={toggleMenu} />
+          <span className="mobile-cart">{mobileCart}</span>
+          <FaBars className="hamburger-menu" onClick={toggleMenu} size={24} />
         </div>
       </nav>
       {menuOpen && <MobileNavOverlay onClose={toggleMenu} />}

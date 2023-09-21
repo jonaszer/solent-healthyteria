@@ -27,11 +27,11 @@ function Card(props) {
           </div>
           <div className="card-price-container">
             <div className="price-container">
-              <h4>£ {props.price}</h4>
+              <h4>£ {props.price.toFixed(2)}</h4>
             </div>
             <div className="card-button-container">
               <button className="card-button" onClick={handleAddToCart}>
-                Order
+                Add to Cart
               </button>
             </div>
           </div>

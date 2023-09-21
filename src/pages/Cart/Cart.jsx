@@ -103,7 +103,7 @@ const Cart = () => {
                           <div className="cart-price-quantity-container">
                             <div className="cart-detail-columns-containers">
                               <h3>Price:</h3>
-                              <h3>£{item.price}</h3>
+                              <h3>£ {item.price.toFixed(2)}</h3>
                             </div>
                             <div className="cart-detail-columns-containers">
                               <h3>Quantity:</h3>
@@ -126,7 +126,7 @@ const Cart = () => {
                             <div className="cart-detail-columns-containers">
                               <h3>Sub-Total: </h3>
                               <h3>
-                                £{(item.price * item.quantity).toFixed(2)}
+                                £ {(item.price * item.quantity).toFixed(2)}
                               </h3>
                             </div>
                           </div>
@@ -154,14 +154,15 @@ const Cart = () => {
                         {item.title} (x{item.quantity}):{" "}
                       </span>
                       <span className="summary-list-subtotal-price-container">
-                        £{(item.price * item.quantity).toFixed(2)}
+                        £ {(item.price * item.quantity).toFixed(2)}
                       </span>
                     </li>
                   ))}
                 </ul>
                 <div className="cart-line"></div>
                 <div className="total-display">
-                  <strong>Total:</strong> <span>£{totalAmount.toFixed(2)}</span>
+                  <strong>Total:</strong>{" "}
+                  <span>£ {totalAmount.toFixed(2)}</span>
                 </div>
                 <form onSubmit={handleSubmit}>
                   {" "}

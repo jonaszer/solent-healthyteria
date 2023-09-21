@@ -29,4 +29,17 @@
   align-items: center;
   flex-direction: column;
   gap: 1em;
+  padding-bottom: 1em;
+}
+
+@media (max-width: 600px) {
+  .orders {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 80px;
+  }
+
+  .orders-title-container > h1 {
+    font-size: 2em;
+  }
 }

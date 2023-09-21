@@ -36,6 +36,7 @@ const NavBar = () => {
   const { dispatch, currentUser } = useContext(AuthContext);
   const { cart: cartItems } = useCart();
   const navigate = useNavigate();
+  const userImage = currentUser?.photoURL || Avatar;
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
@@ -44,8 +45,6 @@ const NavBar = () => {
     dispatch({ type: "LOGOUT" });
     navigate("/");
   };
-
-  const userImage = currentUser?.photoURL || Avatar;
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -67,6 +66,15 @@ const NavBar = () => {
       </Link>
     </span>
   );
+
+  const extractInitials = (name) => {
+    if (!name) return "";
+    const nameParts = name.split(" ");
+    if (nameParts.length === 1) return nameParts[0].charAt(0);
+    return nameParts[0].charAt(0) + nameParts[nameParts.length - 1].charAt(0);
+  };
+
+  const userInitials = extractInitials(currentUser?.displayName);
 
   return (
     <>
@@ -90,7 +98,10 @@ const NavBar = () => {
             <div className="profile">
               <img className="profile-img" src={userImage} alt="Profile" />
               <div className="name-signout-wrapper">
-                <span className="profile-name">{currentUser?.displayName}</span>
+                <span className="profile-name full-name">
+                  {currentUser?.displayName}
+                </span>
+                <span className="profile-name initials">{userInitials}</span>
                 <Link to="#" className="sign-out" onClick={handleLogout}>
                   ( Sign Out )
                 </Link>

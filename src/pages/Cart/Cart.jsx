@@ -38,8 +38,10 @@ const Cart = () => {
     const totalPrice = cart.reduce((accumulator, item) => {
       return accumulator + item.price * item.quantity;
     }, 0);
-    const orderTime = new Date();
-    const formattedOrderTime = `${orderTime.getHours()}:${orderTime.getMinutes()}:${orderTime.getSeconds()}`;
+    const orderDate = new Date();
+    const formattedOrderDate = `${orderDate.getFullYear()}-${String(
+      orderDate.getMonth() + 1
+    ).padStart(2, "0")}-${String(orderDate.getDate()).padStart(2, "0")}`;
 
     const orderDetails = {
       userId: auth.currentUser.uid,
@@ -54,7 +56,7 @@ const Cart = () => {
       locationType: selectionType,
       locationNumber: selectionType === "table" ? tableNumber : labNumber,
       selectedTime: time,
-      orderTime: formattedOrderTime,
+      orderDate: formattedOrderDate,
       totalOrderPrice: totalPrice,
     };
 

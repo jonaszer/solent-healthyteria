@@ -10,7 +10,7 @@ import { AuthContext } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import Title from "./pages/TitlePage/Title";
 import Cart from "./pages/Cart/Cart";
-import Orders from "./pages/myOrders/Orders";
+import Orders from "./pages/Orders/Orders";
 
 function App() {
   const { currentUser } = useContext(AuthContext);

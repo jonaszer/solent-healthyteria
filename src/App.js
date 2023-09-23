@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound/NotFound";
 function App() {
   const { currentUser } = useContext(AuthContext);
 
+  // Secured routes
   const AuthRoute = ({ children }) => {
     return currentUser ? children : <Navigate to={"/"} />;
   };

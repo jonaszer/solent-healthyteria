@@ -1,4 +1,4 @@
-# Solent University Student Meal Ordering Web Application
+# Solent Healthyteria - University Students Meal Ordering Web Application
 
 ![Web App Screenshot](https://res.cloudinary.com/dc2bds3nc/image/upload/v1695507939/Solent_Healthyteria_vm36gz.jpg)
 

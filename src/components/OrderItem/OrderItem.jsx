@@ -31,7 +31,7 @@ const OrderItem = ({ orderDetails }) => {
         </div>
         <div className="section">
           <h4>Total Price</h4>
-          <h5>£{orderDetails.totalOrderPrice.toFixed(2)}</h5>
+          <h5>£ {orderDetails.totalOrderPrice.toFixed(2)}</h5>
         </div>
         <div className="section">
           <FaChevronDown

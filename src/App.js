@@ -11,6 +11,7 @@ import { CartProvider } from "./context/CartContext";
 import Title from "./pages/TitlePage/Title";
 import Cart from "./pages/Cart/Cart";
 import Orders from "./pages/Orders/Orders";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -45,6 +46,14 @@ function App() {
       element: (
         <AuthRoute>
           <Orders />
+        </AuthRoute>
+      ),
+    },
+    {
+      path: "/*",
+      element: (
+        <AuthRoute>
+          <NotFound />
         </AuthRoute>
       ),
     },

@@ -27,8 +27,8 @@ const Title = () => {
                 <img className="title-logo" src={Logo} alt="Logo" />
                 <h3>
                   Your exclusive portal to wholesome and healthy dining at the
-                  University. As a cherished member, you can savor the goodness
-                  of nutritious culinary delights. Order your favorite,
+                  University. As a cherished member, you can savour the goodness
+                  of nutritious culinary delights. Order your favourite,
                   health-packed meals and treat your body to vitality with every
                   bite.
                 </h3>

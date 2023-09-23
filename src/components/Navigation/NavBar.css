@@ -48,6 +48,10 @@
     color: white;
   }
 
+  .initials {
+    display: none;
+  }
+
   .sign-out {
     text-decoration: none;
     color: white;
@@ -136,7 +140,7 @@
   .nav-links {
     display: flex;
     flex-direction: row;
-    gap: 1.5em;
+    gap: 1.2em;
     list-style: none;
     line-height: 2em;
   }
@@ -170,8 +174,16 @@
   }
 
   .profile-name {
-    font-size: 1.2em;
     color: white;
+  }
+
+  .full-name {
+    display: none;
+  }
+
+  .initials {
+    display: inline;
+    font-size: 1.2em;
   }
 
   .sign-out {
@@ -224,7 +236,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 600px) {
   .navbar {
     height: 80px;
     background-color: #384033;

@@ -47,7 +47,11 @@ const Orders = () => {
         {
           // Check if 'orders' is still null (data not fetched yet)
           orders === null ? null : orders.length === 0 ? ( // or return <></> for an empty fragment
-            <p>No orders found.</p>
+            <div className="no-orders-container">
+              <div className="no-orders-p-container">
+                <p>No orders found.</p>
+              </div>
+            </div>
           ) : (
             <ul>
               {orders.map((order) => (

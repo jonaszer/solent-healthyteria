@@ -1,6 +1,6 @@
 # Solent University Student Meal Ordering Web Application
 
-![Web App Screenshot](screenshot.png)
+![Web App Screenshot](https://res.cloudinary.com/dc2bds3nc/image/upload/v1695507939/Solent_Healthyteria_vm36gz.jpg)
 
 ## Table of Contents
 
@@ -25,7 +25,6 @@ The Solent University Student Meal Ordering Web Application is a responsive sing
 ### Intuitive Meal Ordering System
 
 - **Effortless Selection:** Students can browse through a diverse range of meal options, including healthy choices, and add them to their orders with just a few clicks.
-
 
 ## Technologies
 

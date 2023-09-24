@@ -42,7 +42,7 @@ To embark on your journey with the Solent University Student Meal Ordering Web A
 
 1. **Clone this Repository:** Begin by cloning this repository to your local machine using the following command:
 
-git clone [https://github.com/your-username/solent-meal-ordering.git](https://github.com/jonaszer/solent-healthyteria.git)
+git clone (https://github.com/jonaszer/solent-healthyteria.git)
 
 2. **Install Dependencies:** Navigate to the project's root directory and install the necessary dependencies using npm:
 

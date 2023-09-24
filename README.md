@@ -1,4 +1,4 @@
-# Solent University Student Meal Ordering Web Application
+# Solent Healthyteria - University Students Meal Ordering Web Application
 
 ![Web App Screenshot](https://res.cloudinary.com/dc2bds3nc/image/upload/v1695507939/Solent_Healthyteria_vm36gz.jpg)
 
@@ -75,7 +75,3 @@ Contributions to enhance the Solent University Student Meal Ordering Web Applica
 4. **Commit and Push:** Commit your changes with clear and concise commit messages and push them to your forked repository.
 
 5. **Submit a Pull Request:** Submit a pull request from your branch to the main repository, explaining the purpose and details of your contribution.
-
-## License
-
-This project is licensed under the [License Name] - see the [LICENSE.md](LICE

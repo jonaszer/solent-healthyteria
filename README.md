@@ -20,11 +20,11 @@ The Solent University Student Meal Ordering Web Application is a responsive sing
 
 ### User Registration and Authentication
 
-- **Simplified Registration:** Users can easily sign up for an account using their Solent University credentials, ensuring a seamless onboarding process. Google and facebook login are available
+- **Simplified Registration:** Users can quickly sign up for an account using their Solent University credentials, ensuring a seamless onboarding process. Google and Facebook logins are available
 
 ### Intuitive Meal Ordering System
 
-- **Effortless Selection:** Students can browse through a diverse range of meal options, including healthy choices, and add them to their orders with just a few clicks.
+- **Effortless Selection:** Students can browse a diverse range of meal options, including healthy choices, and add them to their orders with just a few clicks.
 
 ## Technologies
 
@@ -56,7 +56,7 @@ git clone https://github.com/your-username/solent-meal-ordering.git
    npm start
    ```
 
-4. **Explore:** Open your preferred web browser and access the application at [http://localhost:3000](http://localhost:3000). Begin exploring and experiencing the streamlined meal ordering process designed for Solent University students.
+4. **Explore:** Open your preferred web browser and access the application at [http://localhost:3000](http://localhost:3000). You can begin exploring and experiencing the streamlined meal ordering process designed for Solent University students.
 
 ## Usage
 

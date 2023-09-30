@@ -13,6 +13,8 @@ const Cart = () => {
   const [tableNumber, setTableNumber] = useState(1);
   const [labNumber, setLabNumber] = useState(101);
   const [time, setTime] = useState("10:00");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   const handleTableChange = (e) => {
     setTableNumber(e.target.value);
@@ -24,6 +26,21 @@ const Cart = () => {
 
   const handleTimeChange = (e) => {
     setTime(e.target.value);
+  };
+
+  const promptDelete = (itemId) => {
+    setItemToDelete(itemId);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    removeFromCart(itemToDelete);
+    setShowDeleteModal(false);
+  };
+
+  const cancelDelete = () => {
+    setItemToDelete(null);
+    setShowDeleteModal(false);
   };
 
   const handleSubmit = async (e) => {
@@ -110,7 +127,13 @@ const Cart = () => {
                               <h3>
                                 <button
                                   className="quantity-button"
-                                  onClick={() => adjustQuantity(item.id, -1)}>
+                                  onClick={() => {
+                                    if (item.quantity === 1) {
+                                      promptDelete(item.id);
+                                    } else {
+                                      adjustQuantity(item.id, -1);
+                                    }
+                                  }}>
                                   <FaMinus className="minus-plus-icon" />
                                 </button>
                                 <span className="quantity-text">
@@ -133,9 +156,7 @@ const Cart = () => {
                           <div className="cart-button-container">
                             <button
                               className="cart-button"
-                              onClick={() => {
-                                removeFromCart(item.id);
-                              }}>
+                              onClick={() => promptDelete(item.id)}>
                               <FaTrash className="trash-icon" />
                             </button>
                           </div>
@@ -264,6 +285,17 @@ const Cart = () => {
         )}
       </div>
       <Footer />
+      {showDeleteModal && (
+        <div className="overlay">
+          <div className="modal">
+            <p>Do you really want to remove this item from the cart?</p>
+            <div className="modal-buttons">
+              <button onClick={confirmDelete}>Yes</button>
+              <button onClick={cancelDelete}>No</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

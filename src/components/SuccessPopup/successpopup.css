@@ -1,0 +1,45 @@
+.success-popup {
+  position: absolute;
+  background-color: #384033;
+  height: auto;
+  width: auto;
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 1);
+}
+
+.text-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  padding: 2em;
+}
+
+.text-container .clock {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #a3f642;
+}
+
+.text-container > h1 {
+  color: white;
+}
+
+.text-container > p {
+  color: white;
+}
+
+.text-container .counter {
+  color: white;
+}
+
+@media (max-width: 600px) {
+  .text-container > p {
+    color: white;
+    font-size: 0.9em;
+  }
+}

@@ -11,9 +11,12 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
+import SuccessPopup from "../SuccessPopup/SuccessPopup";
 
 const Register = ({ onClose }) => {
   const { currentUser, dispatch } = useContext(AuthContext);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [countdown, setCountdown] = useState(5);
   const [inputValues, setInputValues] = useState({
     name: "",
     email: "",
@@ -28,6 +31,18 @@ const Register = ({ onClose }) => {
       navigate("/index");
     }
   }, [currentUser, navigate]);
+
+  useEffect(() => {
+    if (showSuccessPopup && countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    } else if (countdown === 0) {
+      navigate("/index");
+    }
+  }, [showSuccessPopup, countdown, navigate]);
 
   const inputs = [
     {
@@ -73,11 +88,17 @@ const Register = ({ onClose }) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
 
+  const handleClosePopup = () => {
+    setShowSuccessPopup(false);
+    setCountdown(5);
+    navigate("/index");
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
 
     if (inputValues.password !== inputValues.confirmPassword) {
-      console.error("Passwords do not match"); // Or display a user-friendly error message
+      console.error("Passwords do not match");
       return;
     }
 
@@ -91,8 +112,10 @@ const Register = ({ onClose }) => {
       await updateProfile(user, {
         displayName: inputValues.name,
       });
+
+      setShowSuccessPopup(true);
     } catch (error) {
-      console.error(error.message); // Handle/display error to the user
+      console.error(error.message);
     }
   };
 
@@ -153,6 +176,9 @@ const Register = ({ onClose }) => {
           </button>
         </div>
       </form>
+      {showSuccessPopup && (
+        <SuccessPopup countdown={countdown} onClose={handleClosePopup} />
+      )}
     </div>
   );
 };

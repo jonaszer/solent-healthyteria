@@ -13,6 +13,7 @@ function Card(props) {
       price: props.price,
     };
     addToCart(item);
+    props.onAddToCart && props.onAddToCart(item);
   };
 
   return (

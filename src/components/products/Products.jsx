@@ -3,10 +3,12 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import Card from "../Card/Card";
 import "./products.css";
+import Notification from "../Notification/Notification";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     const collectionRef = collection(db, "products");
@@ -57,6 +59,20 @@ const Products = () => {
     });
   };
 
+  const handleAddToCartNotification = (product) => {
+    const newNotification = {
+      id: Date.now(),
+      message: `Added ${product.title} to the cart!`,
+    };
+    setNotifications((prev) => [...prev, newNotification]);
+
+    setTimeout(() => {
+      setNotifications((prev) =>
+        prev.filter((notif) => notif.id !== newNotification.id)
+      );
+    }, 2000);
+  };
+
   return (
     <>
       <div className="all-products-container">
@@ -75,7 +91,13 @@ const Products = () => {
                 imageUrl={product.imageUrl}
                 title={product.title}
                 price={product.price}
+                onAddToCart={handleAddToCartNotification}
               />
+            ))}
+          </div>
+          <div className="notification-container">
+            {notifications.map((notif) => (
+              <Notification key={notif.id} message={notif.message} />
             ))}
           </div>
         </div>

@@ -1,0 +1,36 @@
+.notification {
+  background-color: #ffffff;
+  color: black;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  width: 250px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s;
+  left: 20px;
+  opacity: 0.9;
+  position: relative;
+}
+
+.notification::after {
+  content: "";
+  background-color: #a3f642;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  transition: width 2s linear;
+}
+
+.notification.shrinking::after {
+  width: 0%;
+}
+
+@media (max-width: 1024px) {
+  .notification {
+    width: 200px;
+    font-size: 0.7em;
+  }
+}

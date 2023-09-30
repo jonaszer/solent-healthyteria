@@ -309,12 +309,20 @@ label {
 
 @media (max-width: 1024px) {
   .cart-container {
+    width: 100%;
+    padding: 0;
     padding-top: 80px;
+    padding-bottom: 2em;
   }
+
   .items-and-total-container {
     flex-direction: column;
     width: 100%;
     justify-content: center;
+  }
+
+  .cart-details-title-container > h3 {
+    font-size: 0.9em;
   }
 
   .items-and-total-container > ul {
@@ -330,6 +338,11 @@ label {
   .summary-list {
     display: flex;
     flex-direction: column;
+  }
+
+  .summary-list li {
+    font-size: 0.6em;
+    padding: 0.5em 0;
   }
 
   .summary-list-title-quantity-container,

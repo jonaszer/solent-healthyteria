@@ -58,10 +58,6 @@ git clone (https://github.com/jonaszer/solent-healthyteria.git)
 
 4. **Explore:** Open your preferred web browser and access the application at [http://localhost:3000](http://localhost:3000). You can begin exploring and experiencing the streamlined meal ordering process designed for Solent University students.
 
-## Usage
-
-[Provide detailed usage instructions here, including screenshots or GIFs to illustrate key features and workflows.]
-
 ## Contributing
 
 Contributions to enhance the Solent University Student Meal Ordering Web Application are highly encouraged. To contribute, please follow these guidelines:

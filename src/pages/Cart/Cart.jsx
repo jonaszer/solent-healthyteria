@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db, auth } from "../../firebase";
 import { useCart } from "../../context/CartContext";
 import { collection, addDoc } from "firebase/firestore";
@@ -6,6 +6,9 @@ import "./cart.css";
 import NavBar from "../../components/Navigation/NavBar";
 import Footer from "../../components/Footer/Footer";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
+import OrderConfirmationPopup from "../../components/OrderConfirmationPopup/OrderConfirmationPopup";
+import OrderSuccessPopup from "../../components/OrderSuccessPopup/OrderSuccessPopup";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cart, removeFromCart, adjustQuantity, clearCart } = useCart();
@@ -15,6 +18,24 @@ const Cart = () => {
   const [time, setTime] = useState("10:00");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showPlaceOrderModal, setShowPlaceOrderModal] = useState(false);
+  const [countdown, setCountdown] = useState(3);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (showSuccessPopup && countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    } else if (countdown === 0) {
+      navigate("/my-orders");
+    }
+  }, [showSuccessPopup, countdown, navigate]);
 
   const handleTableChange = (e) => {
     setTableNumber(e.target.value);
@@ -31,6 +52,7 @@ const Cart = () => {
   const promptDelete = (itemId) => {
     setItemToDelete(itemId);
     setShowDeleteModal(true);
+    setShowPlaceOrderModal(false);
   };
 
   const confirmDelete = () => {
@@ -43,15 +65,8 @@ const Cart = () => {
     setShowDeleteModal(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!selectionType) {
-      alert("Please select a Table or Lab");
-      return;
-    }
-
-    const location = selectionType === "table" ? tableNumber : labNumber;
+  const confirmOrder = async () => {
+    const locationNumber = selectionType === "table" ? tableNumber : labNumber;
     const totalPrice = cart.reduce((accumulator, item) => {
       return accumulator + item.price * item.quantity;
     }, 0);
@@ -80,10 +95,25 @@ const Cart = () => {
     try {
       await addDoc(collection(db, "orders"), orderDetails);
       clearCart();
-      alert(`Order placed for ${selectionType} ${location} at ${time}`);
+      setSuccessMessage(
+        `Order placed for ${selectionType.toUpperCase()} ${locationNumber} at ${time}`
+      );
+      setShowPlaceOrderModal(false);
+      setShowSuccessPopup(true);
     } catch (error) {
       alert(`Error placing order: ${error.message}`);
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!selectionType) {
+      alert("Please select a Table or Lab");
+      return;
+    }
+
+    setShowPlaceOrderModal(true);
   };
 
   const totalAmount = cart.reduce((accumulator, item) => {
@@ -295,6 +325,16 @@ const Cart = () => {
             </div>
           </div>
         </div>
+      )}
+      {showPlaceOrderModal && (
+        <OrderConfirmationPopup
+          message="Do you really want to place this order?"
+          onConfirm={confirmOrder}
+          onCancel={() => setShowPlaceOrderModal(false)}
+        />
+      )}
+      {showSuccessPopup && (
+        <OrderSuccessPopup message={successMessage} countdown={countdown} />
       )}
     </>
   );

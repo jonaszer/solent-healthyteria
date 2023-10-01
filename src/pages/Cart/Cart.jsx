@@ -217,7 +217,6 @@ const Cart = () => {
                 </div>
                 <form onSubmit={handleSubmit}>
                   {" "}
-                  {/* Add a form tag */}
                   <div className="selection-container">
                     <p>
                       Please choose a location and an hour for the delivery of

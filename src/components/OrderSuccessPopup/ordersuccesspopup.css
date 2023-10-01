@@ -3,7 +3,7 @@
   font-size: 1.2em;
 }
 
-.counter .clock {
+.modal > .counter > .clock {
   font-size: 1.1em;
   font-weight: 500;
   color: #384033;

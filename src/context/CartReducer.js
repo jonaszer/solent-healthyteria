@@ -12,7 +12,6 @@ const cartReducer = (state, action) => {
       );
 
       if (existingItemIndex !== -1) {
-        // If the item already exists in the cart, produce a new array with the updated item
         const updatedItems = state.items.map((item, index) => {
           if (index === existingItemIndex) {
             return { ...item, quantity: item.quantity + 1 };
@@ -25,7 +24,6 @@ const cartReducer = (state, action) => {
           items: updatedItems,
         };
       } else {
-        // If the item is not in the cart, add it with quantity 1
         const newItem = {
           ...action.item,
           quantity: 1,

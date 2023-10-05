@@ -319,8 +319,8 @@ const Cart = () => {
           <div className="modal">
             <p>Do you really want to remove this item from the cart?</p>
             <div className="modal-buttons">
-              <button onClick={confirmDelete}>Yes</button>
               <button onClick={cancelDelete}>No</button>
+              <button onClick={confirmDelete}>Yes</button>
             </div>
           </div>
         </div>

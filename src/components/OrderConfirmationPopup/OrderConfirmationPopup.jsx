@@ -6,8 +6,8 @@ const OrderConfirmationPopup = ({ message, onConfirm, onCancel }) => {
       <div className="modal">
         <p>{message}</p>
         <div className="modal-buttons">
-          <button onClick={onConfirm}>Yes</button>
           <button onClick={onCancel}>No</button>
+          <button onClick={onConfirm}>Yes</button>
         </div>
       </div>
     </div>
